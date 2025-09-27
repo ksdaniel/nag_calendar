@@ -19,7 +19,7 @@ export async function GET(
     const records = await base(process.env.AIRTABLE_TABLE_NAME!)
       .select({
         // Remove maxRecords limit to get all events
-        maxRecords: 3,
+        maxRecords: 200,
       })
       .all();
 
