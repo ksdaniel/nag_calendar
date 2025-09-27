@@ -457,11 +457,11 @@ export default function EventsList() {
             </div>
             {searchTerm && (
               <div className="text-center mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Se caută: "
+                Se caută: &quot;
                 <span className="font-semibold text-orange-500">
                   {searchTerm}
                 </span>
-                "
+                &quot;
               </div>
             )}
           </div>

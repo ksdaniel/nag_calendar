@@ -24,6 +24,8 @@ export async function GET(
     Event[] | { error: string; details?: string; statusCode?: number }
   >
 > {
+  console.log(request.method);
+
   try {
     // Check if we have valid cached data
     const now = Date.now();
