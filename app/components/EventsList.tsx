@@ -87,16 +87,16 @@ export default function EventsList() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-3 sm:p-6">
       {/* Day Filter Header */}
-      <div className="bg-gray-100 dark:bg-gray-800 py-8 mb-8 rounded-lg">
-        <div className="flex justify-center items-center gap-4 flex-wrap">
+      <div className="bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
+        <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
           {uniqueZi.map((zi, index) => (
             <div key={zi} className="flex items-center">
               {/* Filter Button */}
               <button
                 onClick={() => handleZiFilter(zi)}
-                className={`relative w-20 h-20 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 ${
+                className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
                   selectedZi === zi
                     ? "bg-orange-500 text-white shadow-lg transform scale-110"
                     : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
@@ -110,7 +110,7 @@ export default function EventsList() {
 
               {/* Dotted Line */}
               {index < uniqueZi.length - 1 && (
-                <div className="mx-4 w-8 border-t-2 border-dotted border-orange-300"></div>
+                <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
               )}
             </div>
           ))}
@@ -141,34 +141,34 @@ export default function EventsList() {
             key={event.id}
             className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
           >
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row">
               {/* Event Image */}
               {event.Attachments && event.Attachments[0] && (
-                <div className="w-64 flex-shrink-0">
+                <div className="w-full sm:w-64 flex-shrink-0">
                   <Image
                     src={event.Attachments[0].thumbnails.large.url}
                     alt={event.titlu}
                     width={256}
                     height={192}
-                    className="w-64 h-48 object-cover"
+                    className="w-full sm:w-64 h-32 sm:h-48 object-cover"
                   />
                 </div>
               )}
 
               {/* Event Details */}
-              <div className="flex-1 p-6">
+              <div className="flex-1 p-3 sm:p-6">
                 {/* Category/Type */}
-                <div className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-2">
+                <div className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-1 sm:mb-2">
                   {event.titlu}
                 </div>
 
                 {/* Title */}
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 uppercase">
+                <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4 uppercase">
                   {event.Loc}
                 </h2>
 
                 {/* Date and Location Info */}
-                <div className="flex flex-wrap gap-8 text-sm">
+                <div className="flex flex-wrap gap-3 sm:gap-8 text-xs sm:text-sm">
                   <div>
                     <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
                       DATA
@@ -191,8 +191,8 @@ export default function EventsList() {
               </div>
 
               {/* Action/Status */}
-              <div className="flex items-center pr-6">
-                <div className="text-orange-400 font-bold text-sm uppercase tracking-wider">
+              <div className="flex items-center p-3 sm:pr-6 sm:p-0">
+                <div className="text-orange-400 font-bold text-xs sm:text-sm uppercase tracking-wider">
                   DETALII
                 </div>
               </div>
