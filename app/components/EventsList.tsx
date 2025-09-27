@@ -179,6 +179,14 @@ export default function EventsList() {
     return `${paddedHours}:00`;
   };
 
+  const isSingleDayEvent = (event: Event) => {
+    // Count how many events have the same location
+    const locationCount = events.filter((e) => e.Loc === event.Loc).length;
+
+    // Return true if this location appears only once in the entire events array
+    return locationCount === 1;
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center p-8">
@@ -328,12 +336,19 @@ export default function EventsList() {
         {filteredEvents.map((event) => (
           <div
             key={event.id}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative"
           >
+            {/* Single Day Badge */}
+            {isSingleDayEvent(event) && (
+              <div className="absolute top-3 right-3 z-10 bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                DOAR AZI
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row">
               {/* Event Image */}
               {event.Attachments && event.Attachments[0] && (
-                <div className="w-full sm:w-64 flex-shrink-0">
+                <div className="w-full sm:w-64 flex-shrink-0 relative">
                   <Image
                     src={event.Attachments[0].thumbnails.large.url}
                     alt={event.titlu}
