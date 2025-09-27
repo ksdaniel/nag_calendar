@@ -10,6 +10,7 @@ export default function EventsList() {
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [selectedZi, setSelectedZi] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showSearch, setShowSearch] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -221,20 +222,46 @@ export default function EventsList() {
 
   return (
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
-      {/* Search Box */}
-      <div className="mb-6">
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-3">
-          <div className="relative max-w-2xl mx-auto">
-            <input
-              type="text"
-              placeholder="Caută evenimente..."
-              value={searchTerm}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 shadow-sm"
-            />
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+      {/* Day Filter Header */}
+      <div className="bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
+        <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
+          {uniqueZi.map((zi, index) => (
+            <div key={zi} className="flex items-center">
+              {/* Filter Button */}
+              <button
+                onClick={() => handleZiFilter(zi)}
+                className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
+                  selectedZi === zi
+                    ? "bg-orange-500 text-white shadow-lg transform scale-110"
+                    : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
+                }`}
+              >
+                {zi.slice(0, 3).toUpperCase()}
+                {selectedZi === zi && (
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-orange-500"></div>
+                )}
+              </button>
+
+              {/* Dotted Line */}
+              {index < uniqueZi.length - 1 && (
+                <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+              )}
+            </div>
+          ))}
+
+          {/* Search Toggle Button */}
+          <div className="flex items-center">
+            <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+            <button
+              onClick={() => setShowSearch(!showSearch)}
+              className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
+                showSearch || searchTerm.trim()
+                  ? "bg-orange-500 text-white shadow-lg transform scale-110"
+                  : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
+              }`}
+            >
               <svg
-                className="h-6 w-6 text-gray-400"
+                className="h-5 w-5 sm:h-6 sm:w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -246,14 +273,27 @@ export default function EventsList() {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </div>
-            {searchTerm && (
-              <button
-                onClick={() => handleSearchChange("")}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
-              >
+              {(showSearch || searchTerm.trim()) && (
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-orange-500"></div>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Search Input - Shows when toggled */}
+        {showSearch && (
+          <div className="mt-8 px-4">
+            <div className="relative max-w-md mx-auto">
+              <input
+                type="text"
+                placeholder="Caută evenimente..."
+                value={searchTerm}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="w-full px-4 py-3 pl-10 pr-4 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+              />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <svg
-                  className="h-6 w-6"
+                  className="h-4 w-4 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -262,42 +302,42 @@ export default function EventsList() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Day Filter Header */}
-      <div className="bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
-        <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
-          {uniqueZi.map((zi, index) => (
-            <div key={zi} className="flex items-center">
-              {/* Filter Button */}
-              <button
-                onClick={() => handleZiFilter(zi)}
-                className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
-                  selectedZi === zi
-                    ? "bg-[#3AE9F3] text-black shadow-lg transform scale-110"
-                    : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
-                }`}
-              >
-                {zi.slice(0, 3).toUpperCase()}
-                {selectedZi === zi && (
-                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#3AE9F3]"></div>
-                )}
-              </button>
-
-              {/* Dotted Line */}
-              {index < uniqueZi.length - 1 && (
-                <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+              </div>
+              {searchTerm && (
+                <button
+                  onClick={() => handleSearchChange("")}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
               )}
             </div>
-          ))}
-        </div>
+            {searchTerm && (
+              <div className="text-center mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Se caută: "
+                <span className="font-semibold text-orange-500">
+                  {searchTerm}
+                </span>
+                "
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Active Filter Info */}
         {selectedZi && (
