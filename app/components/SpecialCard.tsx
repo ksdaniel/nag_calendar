@@ -39,11 +39,21 @@ export default function SpecialCard() {
 
             {/* Action Buttons */}
             <div className="w-full max-w-2xl mt-6 space-y-3">
-              <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider">
+              <button
+                onClick={() =>
+                  window.open("https://artcrawlcluj.com/", "_blank")
+                }
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider"
+              >
                 Rezerveaza un tur
               </button>
 
-              <button className="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider border border-gray-300 dark:border-gray-600">
+              <button
+                onClick={() =>
+                  window.open("https://artcrawlcluj.com/calendarg/", "_blank")
+                }
+                className="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider border border-gray-300 dark:border-gray-600"
+              >
                 Calendar evenimente
               </button>
             </div>
