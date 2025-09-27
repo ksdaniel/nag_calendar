@@ -428,7 +428,7 @@ export default function EventsList() {
         {filteredEvents.map((event) => (
           <div
             key={event.id}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative"
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative z-0"
           >
             {/* Single Day Badge */}
             {isSingleDayEvent(event) && (
