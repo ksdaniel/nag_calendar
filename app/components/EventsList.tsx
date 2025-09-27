@@ -228,9 +228,11 @@ export default function EventsList() {
 
   const handleSaveEvent = (eventId: string) => {
     if (typeof window !== "undefined") {
+      const event = events.find((e) => e.id === eventId);
+      const isCurrentlySaved = savedEvents.includes(eventId);
       let updatedSavedEvents: string[];
 
-      if (savedEvents.includes(eventId)) {
+      if (isCurrentlySaved) {
         // Remove from saved events if already saved
         updatedSavedEvents = savedEvents.filter((id) => id !== eventId);
       } else {
@@ -243,6 +245,26 @@ export default function EventsList() {
         "nag_2025_saved",
         JSON.stringify(updatedSavedEvents),
       );
+
+      // Track PostHog event
+      if (event) {
+        posthog.capture(isCurrentlySaved ? "event_unsaved" : "event_saved", {
+          event_id: eventId,
+          event_title: event.titlu,
+          event_location: event.Loc,
+          event_day: event.zi,
+          event_date: event["start date"],
+          action: isCurrentlySaved ? "unsaved" : "saved",
+          total_saved_events: updatedSavedEvents.length,
+          has_link: !!event.Link,
+          is_single_day_event: isSingleDayEvent(event),
+          search_term_active: searchTerm.trim() !== "",
+          current_search_term: searchTerm.trim() || null,
+          date_filter_active: selectedZi !== null,
+          selected_day: selectedZi,
+          saved_filter_active: showSavedEvents,
+        });
+      }
     }
   };
 
@@ -305,6 +327,18 @@ export default function EventsList() {
                     setSelectedZi(null);
                     setSearchTerm("");
                     setShowSearch(false);
+                  }
+
+                  // Track PostHog event
+                  if (typeof window !== "undefined") {
+                    posthog.capture("saved_events_filter_clicked", {
+                      action: newShowSavedEvents ? "show_saved" : "hide_saved",
+                      total_saved_events: savedEvents.length,
+                      previous_search_term: searchTerm.trim() || null,
+                      previous_date_filter: selectedZi,
+                      filters_cleared: newShowSavedEvents,
+                      total_events: events.length,
+                    });
                   }
                 }}
                 className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
