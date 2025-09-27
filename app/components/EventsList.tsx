@@ -227,6 +227,36 @@ export default function EventsList() {
         )}
       </div>
 
+      {/* Search Filter Indicator */}
+      {searchTerm && (
+        <div className="mb-4 bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-400 p-3 rounded-r-lg">
+          <div className="flex items-center">
+            <svg
+              className="h-4 w-4 text-orange-400 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <span className="text-sm text-orange-700 dark:text-orange-300">
+              Rezultate filtrate pentru: "
+              <span className="font-semibold">{searchTerm}</span>" (
+              {filteredEvents.length}{" "}
+              {filteredEvents.length === 1
+                ? "eveniment găsit"
+                : "evenimente găsite"}
+              )
+            </span>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-4">
         {filteredEvents.map((event) => (
           <div
