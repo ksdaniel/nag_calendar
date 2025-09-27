@@ -123,6 +123,11 @@ export default function EventsList() {
     const newSelection = selectedZi === zi ? null : zi;
     setSelectedZi(newSelection);
 
+    // Clear saved events filter when using day filter
+    if (showSavedEvents) {
+      setShowSavedEvents(false);
+    }
+
     // Track PostHog event
     if (typeof window !== "undefined") {
       posthog.capture("date_filter_clicked", {
@@ -134,6 +139,7 @@ export default function EventsList() {
           newSelection === null
             ? events.length
             : events.filter((event) => event.zi === zi).length,
+        saved_filter_was_active: showSavedEvents,
       });
     }
   };
@@ -368,7 +374,14 @@ export default function EventsList() {
           <div className="flex items-center">
             <div className="mx-1 sm:mx-2 w-2 sm:w-6 border-t-2 border-dotted border-orange-300"></div>
             <button
-              onClick={() => setShowSearch(!showSearch)}
+              onClick={() => {
+                setShowSearch(!showSearch);
+
+                // Clear saved events filter when using search
+                if (showSavedEvents) {
+                  setShowSavedEvents(false);
+                }
+              }}
               className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
                 showSearch || searchTerm.trim()
                   ? "bg-orange-500 text-white shadow-lg transform scale-110"
