@@ -87,11 +87,7 @@ export default function EventsList() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8 text-center">
-        NAG 2025 Cluj - Evenimente
-      </h1>
-
+    <div className="max-w-4xl mx-auto p-6">
       {/* Day Filter Header */}
       <div className="bg-gray-100 dark:bg-gray-800 py-8 mb-8 rounded-lg">
         <div className="flex justify-center items-center gap-4 flex-wrap">
@@ -163,25 +159,16 @@ export default function EventsList() {
               <div className="flex-1 p-6">
                 {/* Category/Type */}
                 <div className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-2">
-                  EVENIMENT
+                  {event.titlu}
                 </div>
 
                 {/* Title */}
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 uppercase">
-                  {event.titlu}
+                  {event.Loc}
                 </h2>
 
                 {/* Date and Location Info */}
                 <div className="flex flex-wrap gap-8 text-sm">
-                  <div>
-                    <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
-                      LOCAȚIE
-                    </div>
-                    <div className="text-gray-900 dark:text-white font-semibold">
-                      {event.Loc}
-                    </div>
-                  </div>
-
                   <div>
                     <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
                       DATA
