@@ -15,6 +15,8 @@ export async function GET(
     Event[] | { error: string; details?: string; statusCode?: number }
   >
 > {
+  console.log(request);
+
   try {
     const records = await base(process.env.AIRTABLE_TABLE_NAME!)
       .select({
@@ -25,7 +27,7 @@ export async function GET(
 
     const events: Event[] = records.map((record) => ({
       id: record.id,
-      ...(record.fields as EventFields),
+      ...(record.fields as unknown as EventFields),
     }));
 
     return NextResponse.json(events);
@@ -35,7 +37,7 @@ export async function GET(
     return NextResponse.json(
       {
         error: "Failed to fetch events",
-        details: (error as any).message,
+        details: (error as Error).message,
       },
       { status: 500 },
     );

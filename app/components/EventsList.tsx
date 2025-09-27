@@ -28,7 +28,7 @@ export default function EventsList() {
             new Set(eventsData.map((event: Event) => event.zi)),
           );
           if (uniqueZiValues.length > 0) {
-            setSelectedZi(uniqueZiValues[0]);
+            setSelectedZi(uniqueZiValues[0] as string);
           }
         }
       } catch (err) {
