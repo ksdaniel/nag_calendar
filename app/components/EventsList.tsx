@@ -544,21 +544,7 @@ export default function EventsList() {
               </div>
 
               {/* Action/Status */}
-              <div className="flex flex-row sm:flex-col items-center sm:justify-center gap-3 p-3 sm:pr-6 sm:p-0">
-                {/* Save Button */}
-                <button
-                  onClick={() => handleSaveEvent(event.id)}
-                  className={`font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200 ${
-                    savedEvents.includes(event.id)
-                      ? "text-red-600 hover:text-red-500"
-                      : "text-red-500 hover:text-red-600"
-                  }`}
-                >
-                  {savedEvents.includes(event.id) ? "SALVAT" : "SALVEAZĂ"}
-                </button>
-
-                <div className="sm:hidden">|</div>
-
+              <div className="flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-3 p-3 sm:pr-6 sm:p-0">
                 {/* Details Button */}
                 {event.Link ? (
                   <a
@@ -578,6 +564,18 @@ export default function EventsList() {
                     DETALII
                   </button>
                 )}
+
+                {/* Save Button */}
+                <button
+                  onClick={() => handleSaveEvent(event.id)}
+                  className={`font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200 ${
+                    savedEvents.includes(event.id)
+                      ? "text-red-600 hover:text-red-500"
+                      : "text-red-500 hover:text-red-600"
+                  }`}
+                >
+                  {savedEvents.includes(event.id) ? "SALVAT" : "SALVEAZĂ"}
+                </button>
               </div>
             </div>
           </div>
