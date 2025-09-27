@@ -207,7 +207,7 @@ export default function EventsList() {
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
       {/* Search Box */}
       <div className="mb-6">
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-3">
           <div className="relative max-w-2xl mx-auto">
             <input
               type="text"
@@ -252,15 +252,6 @@ export default function EventsList() {
               </button>
             )}
           </div>
-          {searchTerm && (
-            <div className="text-center mt-3 text-sm text-gray-600 dark:text-gray-400">
-              Se caută: "
-              <span className="font-semibold text-orange-500">
-                {searchTerm}
-              </span>
-              "
-            </div>
-          )}
         </div>
       </div>
 
