@@ -33,6 +33,7 @@ export interface EventFields {
   "ora închidere": string; // Closing time
   "start date": string; // ISO date string
   "End date": string; // ISO date string
+  Link?: string; // Optional URL link
   Attachments?: AirtableAttachment[]; // Optional attachments
 }
 
@@ -45,6 +46,7 @@ export interface Event {
   "ora închidere": string;
   "start date": string;
   "End date": string;
+  Link?: string;
   Attachments?: AirtableAttachment[];
 }
 

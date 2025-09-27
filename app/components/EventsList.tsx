@@ -192,9 +192,20 @@ export default function EventsList() {
 
               {/* Action/Status */}
               <div className="flex items-center p-3 sm:pr-6 sm:p-0">
-                <div className="text-orange-400 font-bold text-xs sm:text-sm uppercase tracking-wider">
-                  DETALII
-                </div>
+                {event.Link ? (
+                  <a
+                    href={event.Link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200"
+                  >
+                    DETALII
+                  </a>
+                ) : (
+                  <div className="text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                    DETALII
+                  </div>
+                )}
               </div>
             </div>
           </div>
