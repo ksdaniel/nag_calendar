@@ -396,7 +396,7 @@ export default function EventsList() {
           >
             {/* Single Day Badge */}
             {isSingleDayEvent(event) && (
-              <div className="absolute top-3 right-3 z-10 bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+              <div className="absolute top-3 left-3 z-10 bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
                 DOAR AZI
               </div>
             )}
@@ -451,7 +451,15 @@ export default function EventsList() {
               </div>
 
               {/* Action/Status */}
-              <div className="flex items-center p-3 sm:pr-6 sm:p-0">
+              <div className="flex flex-row sm:flex-col items-center sm:justify-center gap-3 p-3 sm:pr-6 sm:p-0">
+                {/* Heart Button */}
+                <button className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200">
+                  SALVEAZA
+                </button>
+
+                <div className="sm:hidden">|</div>
+
+                {/* Details Button */}
                 {event.Link ? (
                   <a
                     href={event.Link}
