@@ -55,24 +55,6 @@ export default function SpecialCard() {
                   // Track PostHog event
                   if (typeof window !== "undefined") {
                     posthog.capture("special_card_button_clicked", {
-                      button_type: "rezerva_tur",
-                      button_text: "Rezerveaza un tur",
-                      destination_url: "https://artcrawlcluj.com/",
-                      card_type: "artcrawl_promo",
-                    });
-                  }
-                  window.open("https://artcrawlcluj.com/", "_blank");
-                }}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider"
-              >
-                Rezerveaza un tur
-              </button>
-
-              <button
-                onClick={() => {
-                  // Track PostHog event
-                  if (typeof window !== "undefined") {
-                    posthog.capture("special_card_button_clicked", {
                       button_type: "calendar_evenimente",
                       button_text: "Calendar evenimente",
                       destination_url: "https://artcrawlcluj.com/calendarg/",
