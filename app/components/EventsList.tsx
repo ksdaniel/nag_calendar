@@ -320,8 +320,8 @@ export default function EventsList() {
               />
             </svg>
             <span className="text-sm text-orange-700 dark:text-orange-300">
-              Rezultate filtrate pentru: "
-              <span className="font-semibold">{searchTerm}</span>" (
+              Rezultate filtrate pentru: &quot;
+              <span className="font-semibold">{searchTerm}</span>&quot; (
               {filteredEvents.length}{" "}
               {filteredEvents.length === 1
                 ? "eveniment găsit"
