@@ -261,13 +261,13 @@ export default function EventsList() {
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
       {/* Day Filter Header */}
       <div className="sticky top-0 z-10 bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
-        <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
+        <div className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap">
           {uniqueZi.map((zi, index) => (
             <div key={zi} className="flex items-center">
               {/* Filter Button */}
               <button
                 onClick={() => handleZiFilter(zi)}
-                className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
+                className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
                   selectedZi === zi
                     ? "bg-orange-500 text-white shadow-lg transform scale-110"
                     : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
@@ -281,7 +281,7 @@ export default function EventsList() {
 
               {/* Dotted Line */}
               {index < uniqueZi.length - 1 && (
-                <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+                <div className="mx-1 sm:mx-2 w-2 sm:w-6 border-t-2 border-dotted border-orange-300"></div>
               )}
             </div>
           ))}
@@ -289,23 +289,23 @@ export default function EventsList() {
           {/* Saved Events Button - Only show if there are saved events */}
           {savedEvents.length > 0 && (
             <div className="flex items-center">
-              <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+              <div className="mx-1 sm:mx-2 w-2 sm:w-6 border-t-2 border-dotted border-orange-300"></div>
               <button
                 onClick={() => setShowSavedEvents(!showSavedEvents)}
-                className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
+                className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
                   showSavedEvents
                     ? "bg-red-500 text-white shadow-lg transform scale-110"
                     : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
                 }`}
               >
                 <svg
-                  className="h-5 w-5 sm:h-6 sm:w-6"
+                  className="h-4 w-4 sm:h-5 sm:w-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
-                <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
                   {savedEvents.length}
                 </div>
                 {showSavedEvents && (
@@ -317,17 +317,17 @@ export default function EventsList() {
 
           {/* Search Toggle Button */}
           <div className="flex items-center">
-            <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+            <div className="mx-1 sm:mx-2 w-2 sm:w-6 border-t-2 border-dotted border-orange-300"></div>
             <button
               onClick={() => setShowSearch(!showSearch)}
-              className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
+              className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
                 showSearch || searchTerm.trim()
                   ? "bg-orange-500 text-white shadow-lg transform scale-110"
                   : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
               }`}
             >
               <svg
-                className="h-5 w-5 sm:h-6 sm:w-6"
+                className="h-4 w-4 sm:h-5 sm:w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
