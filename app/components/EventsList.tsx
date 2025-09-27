@@ -6,6 +6,7 @@ import posthog from "posthog-js";
 import { useWindowScroll } from "@uidotdev/usehooks";
 import { motion, AnimatePresence } from "framer-motion";
 import { Event } from "../api/events/types";
+import SpecialCard from "./SpecialCard";
 
 export default function EventsList() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -685,6 +686,9 @@ export default function EventsList() {
             </div>
           </div>
         ))}
+
+        {/* Special Card - Only show when events list is not empty */}
+        {filteredEvents.length > 0 && <SpecialCard />}
       </div>
 
       {filteredEvents.length === 0 && events.length > 0 && (
