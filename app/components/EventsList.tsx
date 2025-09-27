@@ -116,13 +116,13 @@ export default function EventsList() {
                 onClick={() => handleZiFilter(zi)}
                 className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
                   selectedZi === zi
-                    ? "bg-orange-500 text-white shadow-lg transform scale-110"
+                    ? "bg-[#3AE9F3] text-black shadow-lg transform scale-110"
                     : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
                 }`}
               >
                 {zi.slice(0, 3).toUpperCase()}
                 {selectedZi === zi && (
-                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-orange-500"></div>
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#3AE9F3]"></div>
                 )}
               </button>
 
