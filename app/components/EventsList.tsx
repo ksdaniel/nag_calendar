@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import posthog from "posthog-js";
 import { Event } from "../api/events/types";
 
 export default function EventsList() {
@@ -78,7 +79,53 @@ export default function EventsList() {
   const uniqueZi = Array.from(new Set(events.map((event) => event.zi)));
 
   const handleZiFilter = (zi: string) => {
-    setSelectedZi(selectedZi === zi ? null : zi);
+    const newSelection = selectedZi === zi ? null : zi;
+    setSelectedZi(newSelection);
+
+    // Track PostHog event
+    if (typeof window !== "undefined") {
+      posthog.capture("date_filter_clicked", {
+        selected_day: zi,
+        action: newSelection === null ? "deselected" : "selected",
+        previous_selection: selectedZi,
+        total_events: events.length,
+        filtered_events_count:
+          newSelection === null
+            ? events.length
+            : events.filter((event) => event.zi === zi).length,
+      });
+    }
+  };
+
+  const handleSearchChange = (newSearchTerm: string) => {
+    const previousTerm = searchTerm;
+    setSearchTerm(newSearchTerm);
+
+    // Track PostHog event for search
+    if (typeof window !== "undefined") {
+      // Calculate filtered results for the new search term
+      let searchFilteredEvents = events;
+      if (newSearchTerm.trim()) {
+        const searchLower = newSearchTerm.toLowerCase().trim();
+        searchFilteredEvents = events.filter(
+          (event) =>
+            event.titlu.toLowerCase().includes(searchLower) ||
+            event.Loc.toLowerCase().includes(searchLower) ||
+            event.zi.toLowerCase().includes(searchLower),
+        );
+      }
+
+      posthog.capture("search_used", {
+        search_term: newSearchTerm,
+        search_term_length: newSearchTerm.length,
+        previous_search_term: previousTerm,
+        action: newSearchTerm.trim() === "" ? "cleared" : "searched",
+        total_events: events.length,
+        search_results_count: searchFilteredEvents.length,
+        has_date_filter: selectedZi !== null,
+        selected_day: selectedZi,
+      });
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -129,7 +176,7 @@ export default function EventsList() {
               type="text"
               placeholder="Caută evenimente..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               className="w-full px-6 py-4 pl-14 pr-6 text-lg border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 shadow-sm"
             />
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -149,7 +196,7 @@ export default function EventsList() {
             </div>
             {searchTerm && (
               <button
-                onClick={() => setSearchTerm("")}
+                onClick={() => handleSearchChange("")}
                 className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
               >
                 <svg
