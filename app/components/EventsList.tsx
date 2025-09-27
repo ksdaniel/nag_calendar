@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import posthog from "posthog-js";
 import { useWindowScroll } from "@uidotdev/usehooks";
+import { motion, AnimatePresence } from "framer-motion";
 import { Event } from "../api/events/types";
 
 export default function EventsList() {
@@ -305,21 +306,41 @@ export default function EventsList() {
   return (
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
       {/* Day Filter Header */}
-      <div
-        className={`sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 transition-all duration-300 ${
+      <motion.div
+        className={`sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 mb-4 sm:mb-8 ${
           showLogo ? "rounded-lg" : "rounded-b-lg"
         }`}
+        animate={{
+          paddingTop: showLogo ? "1rem" : "0.75rem",
+          paddingBottom: showLogo ? "2rem" : "1rem",
+        }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
       >
         {/* Header Image */}
-        {showLogo && (
-          <div className="flex justify-center mb-4 sm:mb-6 transition-all duration-300">
-            <img
-              src="nag_logo.png"
-              alt="Nag Events"
-              className="h-16 sm:h-20 w-auto object-contain"
-            />
-          </div>
-        )}
+        <AnimatePresence mode="wait">
+          {showLogo && (
+            <motion.div
+              key="logo"
+              className="flex justify-center mb-4 sm:mb-6"
+              initial={{ opacity: 0, y: -10, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -10, height: 0 }}
+              transition={{
+                duration: 0.15,
+                ease: "easeOut",
+              }}
+            >
+              <img
+                src="nag_logo.png"
+                alt="Nag Events"
+                className="h-16 sm:h-20 w-auto object-contain"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap">
           {uniqueZi.map((zi, index) => (
@@ -511,7 +532,7 @@ export default function EventsList() {
             </button>
           </div>
         )}
-      </div>
+      </motion.div>
 
       {/* Saved Events Filter Indicator */}
       {showSavedEvents && (
