@@ -77,7 +77,7 @@ export default function EventsList() {
 
   // Handle scroll to hide/show logo using useWindowScroll hook
   useEffect(() => {
-    if (scrollY > 10) {
+    if (scrollY !== null && scrollY > 10) {
       setShowLogo(false);
     } else {
       setShowLogo(true);
