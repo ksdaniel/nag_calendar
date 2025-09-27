@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import posthog from "posthog-js";
+import { useWindowScroll } from "@uidotdev/usehooks";
 import { Event } from "../api/events/types";
 
 export default function EventsList() {
@@ -15,7 +16,9 @@ export default function EventsList() {
   const [error, setError] = useState<string | null>(null);
   const [savedEvents, setSavedEvents] = useState<string[]>([]);
   const [showSavedEvents, setShowSavedEvents] = useState<boolean>(false);
+  const [showLogo, setShowLogo] = useState<boolean>(true);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [{ y: scrollY }] = useWindowScroll();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -71,6 +74,15 @@ export default function EventsList() {
       }
     };
   }, []);
+
+  // Handle scroll to hide/show logo using useWindowScroll hook
+  useEffect(() => {
+    if (scrollY > 10) {
+      setShowLogo(false);
+    } else {
+      setShowLogo(true);
+    }
+  }, [scrollY]);
 
   // Filter events when selectedZi, searchTerm, or showSavedEvents changes
   useEffect(() => {
@@ -295,13 +307,15 @@ export default function EventsList() {
       {/* Day Filter Header */}
       <div className="sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
         {/* Header Image */}
-        <div className="flex justify-center mb-4 sm:mb-6">
-          <img
-            src="nag_logo.png"
-            alt="Nag Events"
-            className="h-16 sm:h-20 w-auto object-contain"
-          />
-        </div>
+        {showLogo && (
+          <div className="flex justify-center mb-4 sm:mb-6 transition-all duration-300">
+            <img
+              src="nag_logo.png"
+              alt="Nag Events"
+              className="h-16 sm:h-20 w-auto object-contain"
+            />
+          </div>
+        )}
 
         <div className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap">
           {uniqueZi.map((zi, index) => (
