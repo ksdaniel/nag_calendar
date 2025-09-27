@@ -1,8 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect } from "react";
+import posthog from "posthog-js";
 
 export default function SpecialCard() {
+  // Track when SpecialCard is viewed
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      posthog.capture("special_card_viewed", {
+        card_type: "artcrawl_promo",
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }, []);
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative z-0">
       <div className="flex flex-col sm:flex-row">
@@ -40,18 +51,36 @@ export default function SpecialCard() {
             {/* Action Buttons */}
             <div className="w-full max-w-2xl mt-6 space-y-3">
               <button
-                onClick={() =>
-                  window.open("https://artcrawlcluj.com/", "_blank")
-                }
+                onClick={() => {
+                  // Track PostHog event
+                  if (typeof window !== "undefined") {
+                    posthog.capture("special_card_button_clicked", {
+                      button_type: "rezerva_tur",
+                      button_text: "Rezerveaza un tur",
+                      destination_url: "https://artcrawlcluj.com/",
+                      card_type: "artcrawl_promo",
+                    });
+                  }
+                  window.open("https://artcrawlcluj.com/", "_blank");
+                }}
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider"
               >
                 Rezerveaza un tur
               </button>
 
               <button
-                onClick={() =>
-                  window.open("https://artcrawlcluj.com/calendarg/", "_blank")
-                }
+                onClick={() => {
+                  // Track PostHog event
+                  if (typeof window !== "undefined") {
+                    posthog.capture("special_card_button_clicked", {
+                      button_type: "calendar_evenimente",
+                      button_text: "Calendar evenimente",
+                      destination_url: "https://artcrawlcluj.com/calendarg/",
+                      card_type: "artcrawl_promo",
+                    });
+                  }
+                  window.open("https://artcrawlcluj.com/calendarg/", "_blank");
+                }}
                 className="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm uppercase tracking-wider border border-gray-300 dark:border-gray-600"
               >
                 Calendar evenimente
