@@ -23,21 +23,13 @@ export default function EventsList() {
         }
         const eventsData = await response.json();
 
-        // Sort events by start date
-        const sortedEvents = eventsData.sort((a: Event, b: Event) => {
-          return (
-            new Date(a["start date"]).getTime() -
-            new Date(b["start date"]).getTime()
-          );
-        });
-
-        setEvents(sortedEvents);
-        setFilteredEvents(sortedEvents);
+        setEvents(eventsData);
+        setFilteredEvents(eventsData);
 
         // Set default selection to first zi value
-        if (sortedEvents.length > 0) {
+        if (eventsData.length > 0) {
           const uniqueZiValues = Array.from(
-            new Set(sortedEvents.map((event: Event) => event.zi)),
+            new Set(eventsData.map((event: Event) => event.zi)),
           );
           if (uniqueZiValues.length > 0) {
             setSelectedZi(uniqueZiValues[0] as string);
