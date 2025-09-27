@@ -72,11 +72,16 @@ export default function EventsList() {
     };
   }, []);
 
-  // Filter events when selectedZi or searchTerm changes
+  // Filter events when selectedZi, searchTerm, or showSavedEvents changes
   useEffect(() => {
     let filtered = events;
 
-    // Filter by search term first
+    // Filter by saved events if showSavedEvents is active
+    if (showSavedEvents) {
+      filtered = filtered.filter((event) => savedEvents.includes(event.id));
+    }
+
+    // Filter by search term
     if (searchTerm.trim()) {
       const searchLower = searchTerm.toLowerCase().trim();
       filtered = filtered.filter(
@@ -87,7 +92,7 @@ export default function EventsList() {
       );
     }
 
-    // Then filter by selected zi
+    // Filter by selected zi
     if (selectedZi !== null) {
       filtered = filtered.filter((event) => event.zi === selectedZi);
     }
@@ -109,7 +114,7 @@ export default function EventsList() {
     });
 
     setFilteredEvents(filtered);
-  }, [selectedZi, searchTerm, events]);
+  }, [selectedZi, searchTerm, events, showSavedEvents, savedEvents]);
 
   // Get unique zi values for filter buttons
   const uniqueZi = Array.from(new Set(events.map((event) => event.zi)));
@@ -346,50 +351,6 @@ export default function EventsList() {
           </div>
         </div>
 
-        {/* Saved Events List - Shows when toggled */}
-        {showSavedEvents && (
-          <div className="mt-8 px-4">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-center">
-                Evenimente Salvate ({savedEvents.length})
-              </h3>
-              <div className="space-y-3">
-                {savedEvents.map((savedEventId) => {
-                  const savedEvent = events.find((e) => e.id === savedEventId);
-                  if (!savedEvent) return null;
-
-                  return (
-                    <div
-                      key={savedEventId}
-                      className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-3 flex items-center justify-between"
-                    >
-                      <div className="flex-1">
-                        <div className="text-xs font-medium text-red-500 uppercase tracking-wider mb-1">
-                          {savedEvent.titlu}
-                        </div>
-                        <div className="font-bold text-gray-900 dark:text-white text-sm">
-                          {savedEvent.Loc}
-                        </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                          {savedEvent.zi} •{" "}
-                          {formatTime(savedEvent["ora deschidere"])} -{" "}
-                          {formatTime(savedEvent["ora închidere"])}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => handleSaveEvent(savedEventId)}
-                        className="text-red-500 hover:text-red-600 text-xs font-bold uppercase tracking-wider ml-3"
-                      >
-                        ȘTERGE
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Search Input - Shows when toggled */}
         {showSearch && (
           <div className="mt-8 px-4">
@@ -467,6 +428,28 @@ export default function EventsList() {
           </div>
         )}
       </div>
+
+      {/* Saved Events Filter Indicator */}
+      {showSavedEvents && (
+        <div className="mb-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-400 p-3 rounded-r-lg">
+          <div className="flex items-center">
+            <svg
+              className="h-4 w-4 text-red-400 mr-2"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <span className="text-sm text-red-700 dark:text-red-300">
+              Afișare evenimente salvate ({filteredEvents.length}{" "}
+              {filteredEvents.length === 1
+                ? "eveniment salvat"
+                : "evenimente salvate"}
+              )
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Search Filter Indicator */}
       {searchTerm && (
