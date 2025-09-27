@@ -13,6 +13,7 @@ export default function EventsList() {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [savedEvents, setSavedEvents] = useState<string[]>([]);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -44,6 +45,21 @@ export default function EventsList() {
     };
 
     fetchEvents();
+
+    // Load saved events from localStorage
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("nag_2025_saved");
+      if (saved) {
+        try {
+          const parsedSaved = JSON.parse(saved);
+          if (Array.isArray(parsedSaved)) {
+            setSavedEvents(parsedSaved);
+          }
+        } catch (error) {
+          console.error("Error parsing saved events from localStorage:", error);
+        }
+      }
+    }
   }, []);
 
   // Cleanup timeout on unmount
@@ -202,6 +218,26 @@ export default function EventsList() {
 
     // Return true if this location appears only once in the entire events array
     return locationCount === 1;
+  };
+
+  const handleSaveEvent = (eventId: string) => {
+    if (typeof window !== "undefined") {
+      let updatedSavedEvents: string[];
+
+      if (savedEvents.includes(eventId)) {
+        // Remove from saved events if already saved
+        updatedSavedEvents = savedEvents.filter((id) => id !== eventId);
+      } else {
+        // Add to saved events if not already saved
+        updatedSavedEvents = [...savedEvents, eventId];
+      }
+
+      setSavedEvents(updatedSavedEvents);
+      localStorage.setItem(
+        "nag_2025_saved",
+        JSON.stringify(updatedSavedEvents),
+      );
+    }
   };
 
   if (loading) {
@@ -452,9 +488,16 @@ export default function EventsList() {
 
               {/* Action/Status */}
               <div className="flex flex-row sm:flex-col items-center sm:justify-center gap-3 p-3 sm:pr-6 sm:p-0">
-                {/* Heart Button */}
-                <button className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200">
-                  SALVEAZA
+                {/* Save Button */}
+                <button
+                  onClick={() => handleSaveEvent(event.id)}
+                  className={`font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200 ${
+                    savedEvents.includes(event.id)
+                      ? "text-red-600 hover:text-red-500"
+                      : "text-red-500 hover:text-red-600"
+                  }`}
+                >
+                  {savedEvents.includes(event.id) ? "SALVAT" : "SALVEAZĂ"}
                 </button>
 
                 <div className="sm:hidden">|</div>
