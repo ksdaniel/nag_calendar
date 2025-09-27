@@ -293,7 +293,16 @@ export default function EventsList() {
   return (
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
       {/* Day Filter Header */}
-      <div className="sticky top-0 z-10 bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
+      <div className="sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
+        {/* Header Image */}
+        <div className="flex justify-center mb-4 sm:mb-6">
+          <img
+            src="nag_logo.png"
+            alt="Nag Events"
+            className="h-16 sm:h-20 w-auto object-contain"
+          />
+        </div>
+
         <div className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap">
           {uniqueZi.map((zi, index) => (
             <div key={zi} className="flex items-center">
