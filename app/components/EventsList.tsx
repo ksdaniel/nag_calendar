@@ -296,7 +296,17 @@ export default function EventsList() {
             <div className="flex items-center">
               <div className="mx-1 sm:mx-2 w-2 sm:w-6 border-t-2 border-dotted border-orange-300"></div>
               <button
-                onClick={() => setShowSavedEvents(!showSavedEvents)}
+                onClick={() => {
+                  const newShowSavedEvents = !showSavedEvents;
+                  setShowSavedEvents(newShowSavedEvents);
+
+                  // Clear other filters when showing saved events
+                  if (newShowSavedEvents) {
+                    setSelectedZi(null);
+                    setSearchTerm("");
+                    setShowSearch(false);
+                  }
+                }}
                 className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
                   showSavedEvents
                     ? "bg-red-500 text-white shadow-lg transform scale-110"
