@@ -223,7 +223,7 @@ export default function EventsList() {
   return (
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
       {/* Day Filter Header */}
-      <div className="bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
+      <div className="sticky top-0 z-10 bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
         <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
           {uniqueZi.map((zi, index) => (
             <div key={zi} className="flex items-center">
