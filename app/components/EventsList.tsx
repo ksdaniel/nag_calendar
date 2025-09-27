@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import posthog from "posthog-js";
 import { Event } from "../api/events/types";
@@ -12,6 +12,7 @@ export default function EventsList() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -50,6 +51,15 @@ export default function EventsList() {
     };
 
     fetchEvents();
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
   }, []);
 
   // Filter events when selectedZi or searchTerm changes
@@ -101,31 +111,38 @@ export default function EventsList() {
     const previousTerm = searchTerm;
     setSearchTerm(newSearchTerm);
 
-    // Track PostHog event for search
-    if (typeof window !== "undefined") {
-      // Calculate filtered results for the new search term
-      let searchFilteredEvents = events;
-      if (newSearchTerm.trim()) {
-        const searchLower = newSearchTerm.toLowerCase().trim();
-        searchFilteredEvents = events.filter(
-          (event) =>
-            event.titlu.toLowerCase().includes(searchLower) ||
-            event.Loc.toLowerCase().includes(searchLower) ||
-            event.zi.toLowerCase().includes(searchLower),
-        );
-      }
-
-      posthog.capture("search_used", {
-        search_term: newSearchTerm,
-        search_term_length: newSearchTerm.length,
-        previous_search_term: previousTerm,
-        action: newSearchTerm.trim() === "" ? "cleared" : "searched",
-        total_events: events.length,
-        search_results_count: searchFilteredEvents.length,
-        has_date_filter: selectedZi !== null,
-        selected_day: selectedZi,
-      });
+    // Clear existing timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
     }
+
+    // Set up debounced PostHog tracking
+    searchTimeoutRef.current = setTimeout(() => {
+      if (typeof window !== "undefined") {
+        // Calculate filtered results for the new search term
+        let searchFilteredEvents = events;
+        if (newSearchTerm.trim()) {
+          const searchLower = newSearchTerm.toLowerCase().trim();
+          searchFilteredEvents = events.filter(
+            (event) =>
+              event.titlu.toLowerCase().includes(searchLower) ||
+              event.Loc.toLowerCase().includes(searchLower) ||
+              event.zi.toLowerCase().includes(searchLower),
+          );
+        }
+
+        posthog.capture("search_used", {
+          search_term: newSearchTerm,
+          search_term_length: newSearchTerm.length,
+          previous_search_term: previousTerm,
+          action: newSearchTerm.trim() === "" ? "cleared" : "searched",
+          total_events: events.length,
+          search_results_count: searchFilteredEvents.length,
+          has_date_filter: selectedZi !== null,
+          selected_day: selectedZi,
+        });
+      }
+    }, 250); // 250ms debounce
   };
 
   const handleDetaliiClick = (event: Event) => {
