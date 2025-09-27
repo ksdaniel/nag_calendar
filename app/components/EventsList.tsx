@@ -8,6 +8,7 @@ export default function EventsList() {
   const [events, setEvents] = useState<Event[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [selectedZi, setSelectedZi] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,14 +51,28 @@ export default function EventsList() {
     fetchEvents();
   }, []);
 
-  // Filter events when selectedZi changes
+  // Filter events when selectedZi or searchTerm changes
   useEffect(() => {
-    if (selectedZi === null) {
-      setFilteredEvents(events);
-    } else {
-      setFilteredEvents(events.filter((event) => event.zi === selectedZi));
+    let filtered = events;
+
+    // Filter by search term first
+    if (searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase().trim();
+      filtered = filtered.filter(
+        (event) =>
+          event.titlu.toLowerCase().includes(searchLower) ||
+          event.Loc.toLowerCase().includes(searchLower) ||
+          event.zi.toLowerCase().includes(searchLower),
+      );
     }
-  }, [selectedZi, events]);
+
+    // Then filter by selected zi
+    if (selectedZi !== null) {
+      filtered = filtered.filter((event) => event.zi === selectedZi);
+    }
+
+    setFilteredEvents(filtered);
+  }, [selectedZi, searchTerm, events]);
 
   // Get unique zi values for filter buttons
   const uniqueZi = Array.from(new Set(events.map((event) => event.zi)));
@@ -106,6 +121,65 @@ export default function EventsList() {
 
   return (
     <div className="max-w-6xl mx-auto p-3 sm:p-6">
+      {/* Search Box */}
+      <div className="mb-6">
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-6">
+          <div className="relative max-w-2xl mx-auto">
+            <input
+              type="text"
+              placeholder="Caută evenimente..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-6 py-4 pl-14 pr-6 text-lg border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 shadow-sm"
+            />
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg
+                className="h-6 w-6 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
+              >
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
+          {searchTerm && (
+            <div className="text-center mt-3 text-sm text-gray-600 dark:text-gray-400">
+              Se caută: "
+              <span className="font-semibold text-orange-500">
+                {searchTerm}
+              </span>
+              "
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Day Filter Header */}
       <div className="bg-gray-100 dark:bg-gray-800 py-4 sm:py-8 mb-4 sm:mb-8 rounded-lg">
         <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
