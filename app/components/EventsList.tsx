@@ -14,6 +14,7 @@ export default function EventsList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [savedEvents, setSavedEvents] = useState<string[]>([]);
+  const [showSavedEvents, setShowSavedEvents] = useState<boolean>(false);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -285,6 +286,35 @@ export default function EventsList() {
             </div>
           ))}
 
+          {/* Saved Events Button - Only show if there are saved events */}
+          {savedEvents.length > 0 && (
+            <div className="flex items-center">
+              <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
+              <button
+                onClick={() => setShowSavedEvents(!showSavedEvents)}
+                className={`relative w-12 h-12 sm:w-20 sm:h-20 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
+                  showSavedEvents
+                    ? "bg-red-500 text-white shadow-lg transform scale-110"
+                    : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
+                }`}
+              >
+                <svg
+                  className="h-5 w-5 sm:h-6 sm:w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {savedEvents.length}
+                </div>
+                {showSavedEvents && (
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-red-500"></div>
+                )}
+              </button>
+            </div>
+          )}
+
           {/* Search Toggle Button */}
           <div className="flex items-center">
             <div className="mx-2 sm:mx-4 w-4 sm:w-8 border-t-2 border-dotted border-orange-300"></div>
@@ -315,6 +345,50 @@ export default function EventsList() {
             </button>
           </div>
         </div>
+
+        {/* Saved Events List - Shows when toggled */}
+        {showSavedEvents && (
+          <div className="mt-8 px-4">
+            <div className="max-w-2xl mx-auto">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-center">
+                Evenimente Salvate ({savedEvents.length})
+              </h3>
+              <div className="space-y-3">
+                {savedEvents.map((savedEventId) => {
+                  const savedEvent = events.find((e) => e.id === savedEventId);
+                  if (!savedEvent) return null;
+
+                  return (
+                    <div
+                      key={savedEventId}
+                      className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-3 flex items-center justify-between"
+                    >
+                      <div className="flex-1">
+                        <div className="text-xs font-medium text-red-500 uppercase tracking-wider mb-1">
+                          {savedEvent.titlu}
+                        </div>
+                        <div className="font-bold text-gray-900 dark:text-white text-sm">
+                          {savedEvent.Loc}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                          {savedEvent.zi} •{" "}
+                          {formatTime(savedEvent["ora deschidere"])} -{" "}
+                          {formatTime(savedEvent["ora închidere"])}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleSaveEvent(savedEventId)}
+                        className="text-red-500 hover:text-red-600 text-xs font-bold uppercase tracking-wider ml-3"
+                      >
+                        ȘTERGE
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Search Input - Shows when toggled */}
         {showSearch && (
