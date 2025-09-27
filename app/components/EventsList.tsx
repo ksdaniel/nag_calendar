@@ -19,13 +19,22 @@ export default function EventsList() {
           throw new Error("Failed to fetch events");
         }
         const eventsData = await response.json();
-        setEvents(eventsData);
-        setFilteredEvents(eventsData);
+
+        // Sort events by start date
+        const sortedEvents = eventsData.sort((a: Event, b: Event) => {
+          return (
+            new Date(a["start date"]).getTime() -
+            new Date(b["start date"]).getTime()
+          );
+        });
+
+        setEvents(sortedEvents);
+        setFilteredEvents(sortedEvents);
 
         // Set default selection to first zi value
-        if (eventsData.length > 0) {
+        if (sortedEvents.length > 0) {
           const uniqueZiValues = Array.from(
-            new Set(eventsData.map((event: Event) => event.zi)),
+            new Set(sortedEvents.map((event: Event) => event.zi)),
           );
           if (uniqueZiValues.length > 0) {
             setSelectedZi(uniqueZiValues[0] as string);
@@ -67,7 +76,16 @@ export default function EventsList() {
   };
 
   const formatTime = (timeString: string) => {
-    return timeString.replace(":00", "");
+    // Ensure time is displayed as hh:mm format with leading zeros
+    if (timeString.includes(":")) {
+      const [hours, minutes] = timeString.split(":");
+      const paddedHours = hours.padStart(2, "0");
+      const paddedMinutes = minutes.padStart(2, "0");
+      return `${paddedHours}:${paddedMinutes}`;
+    }
+    // If no colon, assume it's just hours and add :00
+    const paddedHours = timeString.padStart(2, "0");
+    return `${paddedHours}:00`;
   };
 
   if (loading) {
