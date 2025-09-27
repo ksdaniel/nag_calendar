@@ -74,6 +74,22 @@ export default function EventsList() {
       filtered = filtered.filter((event) => event.zi === selectedZi);
     }
 
+    // Sort: single-day events first, then by start date
+    filtered = filtered.sort((a, b) => {
+      const aIsSingle = isSingleDayEvent(a);
+      const bIsSingle = isSingleDayEvent(b);
+
+      // If one is single-day and the other isn't, prioritize single-day
+      if (aIsSingle && !bIsSingle) return -1;
+      if (!aIsSingle && bIsSingle) return 1;
+
+      // If both are the same type (both single or both not), sort by date
+      return (
+        new Date(a["start date"]).getTime() -
+        new Date(b["start date"]).getTime()
+      );
+    });
+
     setFilteredEvents(filtered);
   }, [selectedZi, searchTerm, events]);
 
