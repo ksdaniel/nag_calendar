@@ -687,8 +687,10 @@ export default function EventsList() {
           </div>
         ))}
 
-        {/* Special Card - Only show when events list is not empty */}
-        {filteredEvents.length > 0 && <SpecialCard />}
+        {/* Special Card - Only show when events list is not empty and no filters are active */}
+        {filteredEvents.length > 0 &&
+          !searchTerm.trim() &&
+          !showSavedEvents && <SpecialCard />}
       </div>
 
       {filteredEvents.length === 0 && events.length > 0 && (
