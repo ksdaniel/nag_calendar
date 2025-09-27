@@ -128,6 +128,26 @@ export default function EventsList() {
     }
   };
 
+  const handleDetaliiClick = (event: Event) => {
+    // Track PostHog event for DETALII clicks
+    if (typeof window !== "undefined") {
+      posthog.capture("event_details_clicked", {
+        event_id: event.id,
+        event_title: event.titlu,
+        event_location: event.Loc,
+        event_day: event.zi,
+        event_date: event["start date"],
+        has_link: !!event.Link,
+        link_url: event.Link || null,
+        has_image: !!(event.Attachments && event.Attachments.length > 0),
+        search_term_active: searchTerm.trim() !== "",
+        current_search_term: searchTerm.trim() || null,
+        date_filter_active: selectedZi !== null,
+        selected_day: selectedZi,
+      });
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("ro-RO", {
       weekday: "long",
@@ -366,14 +386,18 @@ export default function EventsList() {
                     href={event.Link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleDetaliiClick(event)}
                     className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200"
                   >
                     DETALII
                   </a>
                 ) : (
-                  <div className="text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                  <button
+                    onClick={() => handleDetaliiClick(event)}
+                    className="text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider cursor-not-allowed"
+                  >
                     DETALII
-                  </div>
+                  </button>
                 )}
               </div>
             </div>
