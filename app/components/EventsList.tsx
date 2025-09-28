@@ -7,6 +7,7 @@ import { useWindowScroll } from "@uidotdev/usehooks";
 import { motion, AnimatePresence } from "framer-motion";
 import { Event } from "../api/events/types";
 import SpecialCard from "./SpecialCard";
+import EventsMapWrapper from "./EventsMapWrapper";
 
 export default function EventsList() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -648,111 +649,116 @@ export default function EventsList() {
         </div>
       )}
 
-      <div className="space-y-4">
-        {filteredEvents.map((event) => (
-          <div
-            key={event.id}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative z-0"
-          >
-            {/* Single Day Badge */}
-            {isSingleDayEvent(event) && (
-              <div className="absolute top-3 left-3 z-10 bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
-                DOAR AZI
-              </div>
-            )}
-
-            <div className="flex flex-col sm:flex-row">
-              {/* Event Image */}
-              {event.Attachments && event.Attachments[0] && (
-                <div className="w-full sm:w-64 flex-shrink-0 relative">
-                  <Image
-                    src={event.Attachments[0].thumbnails.large.url}
-                    alt={event.titlu}
-                    width={256}
-                    height={192}
-                    className="w-full sm:w-64 h-32 sm:h-48 object-cover"
-                  />
+      {/* Conditional rendering: Show map or events list */}
+      {showMap ? (
+        <EventsMapWrapper />
+      ) : (
+        <div className="space-y-4">
+          {filteredEvents.map((event) => (
+            <div
+              key={event.id}
+              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative z-0"
+            >
+              {/* Single Day Badge */}
+              {isSingleDayEvent(event) && (
+                <div className="absolute top-3 left-3 z-10 bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                  DOAR AZI
                 </div>
               )}
 
-              {/* Event Details */}
-              <div className="flex-1 p-3 sm:p-6">
-                {/* Category/Type */}
-                <div className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-1 sm:mb-2">
-                  {event.titlu}
-                </div>
-
-                {/* Title */}
-                <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4 uppercase">
-                  {event.Loc}
-                </h2>
-
-                {/* Date and Location Info */}
-                <div className="flex flex-wrap gap-3 sm:gap-8 text-xs sm:text-sm">
-                  <div>
-                    <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
-                      DATA
-                    </div>
-                    <div className="text-gray-900 dark:text-white font-semibold">
-                      {formatDate(event["start date"])}
-                    </div>
+              <div className="flex flex-col sm:flex-row">
+                {/* Event Image */}
+                {event.Attachments && event.Attachments[0] && (
+                  <div className="w-full sm:w-64 flex-shrink-0 relative">
+                    <Image
+                      src={event.Attachments[0].thumbnails.large.url}
+                      alt={event.titlu}
+                      width={256}
+                      height={192}
+                      className="w-full sm:w-64 h-32 sm:h-48 object-cover"
+                    />
                   </div>
-
-                  <div>
-                    <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
-                      PROGRAM
-                    </div>
-                    <div className="text-gray-900 dark:text-white font-semibold">
-                      {formatTime(event["ora deschidere"])} -{" "}
-                      {formatTime(event["ora închidere"])}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action/Status */}
-              <div className="flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-3 p-3 sm:pr-6 sm:p-0">
-                {/* Details Button */}
-                {event.Link ? (
-                  <a
-                    href={event.Link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => handleDetaliiClick(event)}
-                    className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200"
-                  >
-                    DETALII
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => handleDetaliiClick(event)}
-                    className="text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider cursor-not-allowed"
-                  >
-                    DETALII
-                  </button>
                 )}
 
-                {/* Save Button */}
-                <button
-                  onClick={() => handleSaveEvent(event.id)}
-                  className={`font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200 ${
-                    savedEvents.includes(event.id)
-                      ? "text-red-600 hover:text-red-500"
-                      : "text-red-500 hover:text-red-600"
-                  }`}
-                >
-                  {savedEvents.includes(event.id) ? "SALVAT" : "SALVEAZĂ"}
-                </button>
+                {/* Event Details */}
+                <div className="flex-1 p-3 sm:p-6">
+                  {/* Category/Type */}
+                  <div className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-1 sm:mb-2">
+                    {event.titlu}
+                  </div>
+
+                  {/* Title */}
+                  <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4 uppercase">
+                    {event.Loc}
+                  </h2>
+
+                  {/* Date and Location Info */}
+                  <div className="flex flex-wrap gap-3 sm:gap-8 text-xs sm:text-sm">
+                    <div>
+                      <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
+                        DATA
+                      </div>
+                      <div className="text-gray-900 dark:text-white font-semibold">
+                        {formatDate(event["start date"])}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium mb-1">
+                        PROGRAM
+                      </div>
+                      <div className="text-gray-900 dark:text-white font-semibold">
+                        {formatTime(event["ora deschidere"])} -{" "}
+                        {formatTime(event["ora închidere"])}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action/Status */}
+                <div className="flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-3 p-3 sm:pr-6 sm:p-0">
+                  {/* Details Button */}
+                  {event.Link ? (
+                    <a
+                      href={event.Link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleDetaliiClick(event)}
+                      className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200"
+                    >
+                      DETALII
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => handleDetaliiClick(event)}
+                      className="text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider cursor-not-allowed"
+                    >
+                      DETALII
+                    </button>
+                  )}
+
+                  {/* Save Button */}
+                  <button
+                    onClick={() => handleSaveEvent(event.id)}
+                    className={`font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200 ${
+                      savedEvents.includes(event.id)
+                        ? "text-red-600 hover:text-red-500"
+                        : "text-red-500 hover:text-red-600"
+                    }`}
+                  >
+                    {savedEvents.includes(event.id) ? "SALVAT" : "SALVEAZĂ"}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {/* Special Card - Only show when events list is not empty and no filters are active */}
-        {filteredEvents.length > 0 &&
-          !searchTerm.trim() &&
-          !showSavedEvents && <SpecialCard />}
-      </div>
+          {/* Special Card - Only show when events list is not empty and no filters are active */}
+          {filteredEvents.length > 0 &&
+            !searchTerm.trim() &&
+            !showSavedEvents && <SpecialCard />}
+        </div>
+      )}
 
       {filteredEvents.length === 0 && events.length > 0 && (
         <div className="text-center text-gray-500 p-8">
