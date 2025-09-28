@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Harta NAG Cluj 2025</name>
+    <description/>
+    <Style id="icon-1509-E65100-labelson">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-1.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-1731-0097A7-labelson">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-2.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Folder>
+      <name>Ateliere</name>
+      <Placemark>
+        <name>Adrian Balcău Studio</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1509-E65100-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5838036,46.7774756,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ArcStudio</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 19:00 - 23:00]]></description>
+        <styleUrl>#icon-1509-E65100-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5841905,46.7812102,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Atelierele UNIREA</name>
+        <description>Vineri (3 octombrie): 18:00 - 22:00</description>
+        <styleUrl>#icon-1509-E65100-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.6019339,46.786999,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>STUDIO de FERICIRE</name>
+        <description><![CDATA[Vineri (3 octombrie): 12:00 - 00:00<br>Sâmbătă (4 octombrie): 12:00 - 00:00<br>Duminică (5 octombrie): 12:00 - 22:00]]></description>
+        <styleUrl>#icon-1509-E65100-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5872629,46.7699127,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Studiourile de Creație Albac 19 ale Filialei Cluj-Napoca a Uniunii Artiștilor Plastici din România</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1509-E65100-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.6187212,46.7643664,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Spații de expoziție</name>
+      <Placemark>
+        <name>_subsol_</name>
+        <description>Vineri (3 octombrie): 20:00 - 00:00</description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5898499,46.7680155,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Aluvial Project Space</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00<br>Duminică (5 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5872319,46.7677622,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Camera</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:30 - 22:00<br>Sâmbătă (4 octombrie): 18:30 - 22:00<br>Duminică (5 octombrie): 18:30 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5885073,46.7758753,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Căminul Subcultural</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 00:00<br>Sâmbătă (4 octombrie): 18:00 - 00:00<br>Duminică (5 octombrie): 18:00 - 00:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5856055,46.7824591,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Centrul Cultural German Cluj-Napoca</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 23:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00<br>Duminică (5 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5904403,46.7671337,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Contemporar</name>
+        <description><![CDATA[Vineri (3 octombrie): 15:00 - 23:00<br>Sâmbătă (4 octombrie): 15:00 - 23:00<br>Duminică (5 octombrie): 16:00 - 21:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5929288,46.7680703,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Galeria Biju</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 21:00<br>Sâmbătă (4 octombrie): 18:00 - 20:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5869331,46.7694557,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Galeria Parter</name>
+        <description><![CDATA[Vineri (3 octombrie): 16:00 - 00:00<br>Sâmbătă (4 octombrie): 16:00 - 00:00<br>Duminică (5 octombrie): 16:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5911626,46.7704213,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Galeria Quadro</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00<br>Duminică (5 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5871356,46.7679568,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Galeria Studio 19</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.6187212,46.7643664,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>IAGA Contemporary Art</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 00:00<br>Sâmbătă (4 octombrie): 18:00 - 00:00<br>Duminică (5 octombrie): 16:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.58881,46.7773674,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>La Cave - Institutul Francez Cluj-Napoca</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 21:00<br>Sâmbătă (4 octombrie): 18:00 - 21:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5949736,46.7687741,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>MATCA artspace</name>
+        <description><![CDATA[Vineri (3 octombrie): 19:00 - 22:00<br>Sâmbătă (4 octombrie): 19:00 - 22:00<br>Duminică (5 octombrie): 19:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5989856,46.7660559,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Meron Gallery</name>
+        <description><![CDATA[Vineri (3 octombrie): 07:00 - 00:00<br>Sâmbătă (4 octombrie): 09:00 - 00:00<br>Duminică (5 octombrie): 10:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5869077,46.7748054,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>The Cosmic House</name>
+        <description><![CDATA[Vineri (3 octombrie): 17:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00<br>Duminică (5 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5665569,46.7735099,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Viewpoint Strada Universității x Vault One Gallery</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 23:00<br>Sâmbătă (4 octombrie): 17:00 - 22:00<br>Duminică (5 octombrie): 18:00 - 20:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5902266,46.7681523,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>White Cuib</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 22:00<br>Sâmbătă (4 octombrie): 18:00 - 22:00<br>Duminică (5 octombrie): 18:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5871044,46.7711431,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Zina Gallery</name>
+        <description><![CDATA[Vineri (3 octombrie): 18:00 - 00:00<br>Sâmbătă (4 octombrie): 18:00 - 00:00<br>Duminică (5 octombrie): 16:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.6082985,46.7634061,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ZONA Creative Space</name>
+        <description><![CDATA[Vineri (3 octombrie): 17:00 - 01:00<br>Sâmbătă (4 octombrie): 17:00 - 02:00<br>Duminică (5 octombrie): 16:00 - 22:00]]></description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5257379,46.7839731,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Galeria Casa Matei</name>
+        <description>Sâmbătă (4 octombrie): 17:00 - 22:00</description>
+        <styleUrl>#icon-1731-0097A7-labelson</styleUrl>
+        <Point>
+          <coordinates>
+            23.5875442,46.7711716,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
