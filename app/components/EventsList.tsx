@@ -19,6 +19,7 @@ export default function EventsList() {
   const [savedEvents, setSavedEvents] = useState<string[]>([]);
   const [showSavedEvents, setShowSavedEvents] = useState<boolean>(false);
   const [showLogo, setShowLogo] = useState<boolean>(true);
+  const [showMap, setShowMap] = useState<boolean>(false);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [{ y: scrollY }] = useWindowScroll();
 
@@ -141,6 +142,8 @@ export default function EventsList() {
     if (showSavedEvents) {
       setShowSavedEvents(false);
     }
+    // Clear map view when using day filter
+    setShowMap(false);
 
     // Track PostHog event
     if (typeof window !== "undefined") {
@@ -382,6 +385,7 @@ export default function EventsList() {
                     setSelectedZi(null);
                     setSearchTerm("");
                     setShowSearch(false);
+                    setShowMap(false);
                   }
 
                   // Track PostHog event
@@ -430,6 +434,8 @@ export default function EventsList() {
                 if (showSavedEvents) {
                   setShowSavedEvents(false);
                 }
+                // Clear map view when using search
+                setShowMap(false);
               }}
               className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
                 showSearch || searchTerm.trim()
@@ -451,6 +457,58 @@ export default function EventsList() {
                 />
               </svg>
               {(showSearch || searchTerm.trim()) && (
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#72CEF5]"></div>
+              )}
+            </button>
+          </div>
+
+          {/* Map Toggle Button */}
+          <div className="flex items-center">
+            <div className="mx-1 sm:mx-2 w-2 sm:w-6 border-t-2 border-dotted border-orange-300"></div>
+            <button
+              onClick={() => {
+                setShowMap(!showMap);
+                // Deselect all other filters when map is clicked
+                setSearchTerm("");
+                setShowSearch(false);
+                setShowSavedEvents(false);
+                setSelectedZi(null);
+
+                // Track PostHog event
+                if (typeof window !== "undefined") {
+                  posthog.capture("map_button_clicked", {
+                    action: !showMap ? "show_map" : "hide_map",
+                    total_events: events.length,
+                    filtered_events_count: filteredEvents.length,
+                  });
+                }
+              }}
+              className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center ${
+                showMap
+                  ? "bg-[#72CEF5] text-black shadow-lg transform scale-110"
+                  : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md"
+              }`}
+            >
+              <svg
+                className="h-4 w-4 sm:h-5 sm:w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              {showMap && (
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#72CEF5]"></div>
               )}
             </button>
@@ -526,7 +584,10 @@ export default function EventsList() {
               </span>
             </span>
             <button
-              onClick={() => setSelectedZi(null)}
+              onClick={() => {
+                setSelectedZi(null);
+                setShowMap(false);
+              }}
               className="ml-2 text-xs text-gray-500 hover:text-orange-500 underline"
             >
               (afișează toate)
