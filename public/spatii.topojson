@@ -1,0 +1,171 @@
+{
+  "type": "Topology",
+  "arcs": [],
+  "objects": {
+    "Spații de expoziție": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Point",
+          "coordinates": [23.5898499, 46.7680155, 0],
+          "properties": {
+            "Name": "_subsol_",
+            "description": "Vineri (3 octombrie): 20:00 - 00:00"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5872319, 46.7677622, 0],
+          "properties": {
+            "Name": "Aluvial Project Space",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5885073, 46.7758753, 0],
+          "properties": {
+            "Name": "Camera",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5856055, 46.7824591, 0],
+          "properties": {
+            "Name": "Căminul Subcultural",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5904403, 46.7671337, 0],
+          "properties": {
+            "Name": "Centrul Cultural German Cluj-Napoca",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5929288, 46.7680703, 0],
+          "properties": {
+            "Name": "Contemporar",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5869331, 46.7694557, 0],
+          "properties": {
+            "Name": "Galeria Biju",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5911626, 46.7704213, 0],
+          "properties": {
+            "Name": "Galeria Parter",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5871356, 46.7679568, 0],
+          "properties": {
+            "Name": "Galeria Quadro",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.6187212, 46.7643664, 0],
+          "properties": {
+            "Name": "Galeria Studio 19",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.58881, 46.7773674, 0],
+          "properties": {
+            "Name": "IAGA Contemporary Art",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5949736, 46.7687741, 0],
+          "properties": {
+            "Name": "La Cave - Institutul Francez Cluj-Napoca",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5989856, 46.7660559, 0],
+          "properties": {
+            "Name": "MATCA artspace",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5869077, 46.7748054, 0],
+          "properties": {
+            "Name": "Meron Gallery",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5665569, 46.7735099, 0],
+          "properties": {
+            "Name": "The Cosmic House",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5902266, 46.7681523, 0],
+          "properties": {
+            "Name": "Viewpoint Strada Universității x Vault One Gallery",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5871044, 46.7711431, 0],
+          "properties": {
+            "Name": "White Cuib",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.6082985, 46.7634061, 0],
+          "properties": {
+            "Name": "Zina Gallery",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5257379, 46.7839731, 0],
+          "properties": {
+            "Name": "ZONA Creative Space",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5875442, 46.7711716, 0],
+          "properties": {
+            "Name": "Galeria Casa Matei",
+            "description": "Sâmbătă (4 octombrie): 17:00 - 22:00"
+          }
+        }
+      ]
+    }
+  }
+}

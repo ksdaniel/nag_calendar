@@ -1,0 +1,51 @@
+{
+  "type": "Topology",
+  "arcs": [],
+  "objects": {
+    "Ateliere": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Point",
+          "coordinates": [23.5838036, 46.7774756, 0],
+          "properties": {
+            "Name": "Adrian Balcău Studio",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5841905, 46.7812102, 0],
+          "properties": {
+            "Name": "ArcStudio",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.6019339, 46.786999, 0],
+          "properties": {
+            "Name": "Atelierele UNIREA",
+            "description": "Vineri (3 octombrie): 18:00 - 22:00"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.5872629, 46.7699127, 0],
+          "properties": {
+            "Name": "STUDIO de FERICIRE",
+            "description": null
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [23.6187212, 46.7643664, 0],
+          "properties": {
+            "Name": "Studiourile de Creație Albac 19 ale Filialei Cluj-Napoca a Uniunii Artiștilor Plastici din România",
+            "description": null
+          }
+        }
+      ]
+    }
+  }
+}

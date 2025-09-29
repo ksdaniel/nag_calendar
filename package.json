@@ -11,19 +11,16 @@
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
     "airtable": "^0.12.2",
-    "leaflet": "^1.9.4",
     "motion": "^12.23.22",
     "next": "15.5.4",
     "posthog-js": "^1.268.6",
     "posthog-node": "^4.18.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-leaflet": "^5.0.0-rc.2"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/leaflet": "^1.9.20",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
