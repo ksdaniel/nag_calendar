@@ -38,10 +38,10 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         api_host: "/ingest",
         ui_host: "https://eu.posthog.com",
         person_profiles: "identified_only",
-        capture_pageviews: false, // We capture pageviews manually
+        capture_pageview: true, // We capture pageviews manually
         loaded: (posthog) => {
           if (process.env.NODE_ENV === "development")
-            console.log("PostHog loaded");
+            console.log("PostHog loaded: ", posthog);
         },
       });
     }
