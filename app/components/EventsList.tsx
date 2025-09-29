@@ -657,7 +657,7 @@ export default function EventsList() {
               {/* Event Details */}
               <div className="flex-1 p-3 sm:p-6">
                 {/* Category/Type */}
-                <div className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-1 sm:mb-2">
+                <div className="text-xs font-medium text-gray-900 dark:text-white uppercase tracking-wider mb-1 sm:mb-2">
                   {event.titlu}
                 </div>
 
@@ -698,14 +698,14 @@ export default function EventsList() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleDetaliiClick(event)}
-                    className="text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200"
+                    className="sm:h-10 text-orange-400 hover:text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200"
                   >
                     DETALII
                   </a>
                 ) : (
                   <button
                     onClick={() => handleDetaliiClick(event)}
-                    className="text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider cursor-not-allowed"
+                    className="sm:h-10 text-gray-400 font-bold text-xs sm:text-sm uppercase tracking-wider cursor-not-allowed"
                   >
                     DETALII
                   </button>
@@ -716,8 +716,8 @@ export default function EventsList() {
                   onClick={() => handleSaveEvent(event.id)}
                   className={`font-bold text-xs sm:text-sm uppercase tracking-wider transition-colors duration-200 ${
                     savedEvents.includes(event.id)
-                      ? "text-red-600 hover:text-red-500"
-                      : "text-red-500 hover:text-red-600"
+                      ? "text-gray-900 dark:text-white"
+                      : "text-red-900 dark:text-white"
                   }`}
                 >
                   {savedEvents.includes(event.id) ? "SALVAT" : "SALVEAZĂ"}
