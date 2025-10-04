@@ -649,6 +649,7 @@ export default function EventsList() {
                     alt={event.titlu}
                     width={256}
                     height={192}
+                    sizes="(max-width: 640px) 100vw, 256px"
                     className="w-full sm:w-64 h-32 sm:h-48 object-cover"
                   />
                 </div>
